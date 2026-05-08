@@ -1,7 +1,7 @@
 'use strict';
 
 const TARGET_TITLE = 'Dev Environment - Unity Playworks';
-const DOCUMENTATION_URL = 'https://example.com/documentation';
+const DOCUMENTATION_URL = 'https://github.com/diemonic1/LunaParticleSystem';
 const COMPATIBILITY_TABLE_URL = 'https://docs.google.com/spreadsheets/d/1yAGQokKCIa_cuVtBEkPlxS2xls-0DV8M09hwa01aYk0/edit?pli=1&gid=0#gid=0';
 
 const PREVIEW_IFRAME_ID = 'preview-iframe';

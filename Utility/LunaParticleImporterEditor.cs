@@ -16,7 +16,7 @@ public class LunaParticleImporterEditor : Editor
 
         if (GUILayout.Button("Open Documentation"))
         {
-            Application.OpenURL("https://your-docs-site.com");
+            Application.OpenURL("https://github.com/diemonic1/LunaParticleSystem");
         }
         
         GUI.backgroundColor = new Color(0.02f, 0.57f, 0.08f);
