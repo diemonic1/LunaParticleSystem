@@ -6,7 +6,7 @@ using Object = System.Object;
 
 public class LunaParticleSystemBridge : MonoBehaviour
 {
-    private const string Version = "1.0.2";
+    private const string Version = "1.0.3";
     
     // DO NOT MAKE IT A CONSTANT!!!!
     private string code_SubscribeOnUIUpdate = "window.addEventListener('message', (e) => " +

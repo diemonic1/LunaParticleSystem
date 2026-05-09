@@ -35,6 +35,9 @@
   transition: transform 0.25s ease;
   z-index: 50;
   pointer-events: none;
+  /* Thin dark scrollbar for Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: #4a4a4a #252526;
 }
 
 #lps-settings-panel.lps-open {
@@ -201,6 +204,37 @@
   overflow-y: auto;
   padding: 12px;
   box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: #4a4a4a #252526;
+}
+
+/* Thin dark scrollbar for WebKit browsers */
+#lps-sections-container::-webkit-scrollbar,
+#lps-settings-panel::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+#lps-sections-container::-webkit-scrollbar-track,
+#lps-settings-panel::-webkit-scrollbar-track {
+  background: #252526;
+}
+
+#lps-sections-container::-webkit-scrollbar-thumb,
+#lps-settings-panel::-webkit-scrollbar-thumb {
+  background: #4a4a4a;
+  border-radius: 10px;
+  border: 2px solid #252526;
+}
+
+#lps-sections-container::-webkit-scrollbar-thumb:hover,
+#lps-settings-panel::-webkit-scrollbar-thumb:hover {
+  background: #5a5a5a;
+}
+
+#lps-sections-container::-webkit-scrollbar-corner,
+#lps-settings-panel::-webkit-scrollbar-corner {
+  background: #252526;
 }
 
 .lps-section {

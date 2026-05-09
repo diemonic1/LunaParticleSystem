@@ -84,7 +84,24 @@ namespace PlayablesPlugins
                 
                 // Renderer
                 { "Renderer|bool|Renderer", typeof(LPSData).GetProperty(nameof(Renderer)) },
+                { "Render Mode|select_one|Renderer", typeof(LPSData).GetProperty(nameof(RenderModeParticles)) },
+                { "Camera Scale (Stretched Billboard)|float|Renderer", typeof(LPSData).GetProperty(nameof(CameraScale)) },
+                //{ "Length Scale|float|Renderer", typeof(LPSData).GetProperty(nameof(LengthScale)) }, // There is no compilation error, but in the build it gives undefined
+                //{ "Freeform Stretching|float|Renderer", typeof(LPSData).GetProperty(nameof(FreeformStretching)) }, // compilation error
+                //{ "Rotate with Stretch|float|Renderer", typeof(LPSData).GetProperty(nameof(RotateWithStretch)) }, // compilation error
                 { "Normal Direction|float|Renderer", typeof(LPSData).GetProperty(nameof(NormalDirection)) },
+                //{ "Sort Mode|select_one|Renderer", typeof(LPSData).GetProperty(nameof(SortMode)) }, // compilation error
+                { "Sorting Fudge|float|Renderer", typeof(LPSData).GetProperty(nameof(SortingFudge)) },
+                { "Min Particle Size|float|Renderer", typeof(LPSData).GetProperty(nameof(MinParticleSize)) },
+                { "Max Particle Size|float|Renderer", typeof(LPSData).GetProperty(nameof(MaxParticleSize)) },
+                { "Render Alignment|select_one|Renderer", typeof(LPSData).GetProperty(nameof(RenderAlignment)) },
+                //{ "Flip|vector_3|Renderer", typeof(LPSData).GetProperty(nameof(Flip)) }, // compilation error
+                //{ "Allow Roll|bool|Renderer", typeof(LPSData).GetProperty(nameof(AllowRoll)) }, // compilation error
+                { "Pivot|vector_3|Renderer", typeof(LPSData).GetProperty(nameof(Pivot)) },
+                //{ "Visualize Pivot|bool|Renderer", typeof(LPSData).GetProperty(nameof(VisualizePivot)) }, // how to address to this?
+                //{ "Masking|select_one|Renderer", typeof(LPSData).GetProperty(nameof(Masking)) }, // compilation error
+                //{ "Apply Active Color Space|bool|Renderer", typeof(LPSData).GetProperty(nameof(ApplyActiveColorSpace)) }, // how to address to this?
+                //{ "Custom Vertex Streams|bool|Renderer", typeof(LPSData).GetProperty(nameof(CustomVertexStreams)) }, // how to address to this?
                 { "Order In Layer (Sorting Layer)|int|Renderer", typeof(LPSData).GetProperty(nameof(OrderInLayer)) },
             };
         }
@@ -557,9 +574,9 @@ namespace PlayablesPlugins
             {
                 var shape = _particleSystem.shape;
                 shape.position = new Vector3(
-                    float.Parse(value.Split('|')[0]), 
-                    float.Parse(value.Split('|')[1]), 
-                    float.Parse(value.Split('|')[2]));
+                    float.Parse(value.Split('|')[0], CultureInfo.InvariantCulture), 
+                    float.Parse(value.Split('|')[1], CultureInfo.InvariantCulture), 
+                    float.Parse(value.Split('|')[2], CultureInfo.InvariantCulture));
             }
         }
 
@@ -572,9 +589,9 @@ namespace PlayablesPlugins
             {
                 var shape = _particleSystem.shape;
                 shape.rotation = new Vector3(
-                    float.Parse(value.Split('|')[0]), 
-                    float.Parse(value.Split('|')[1]), 
-                    float.Parse(value.Split('|')[2]));
+                    float.Parse(value.Split('|')[0], CultureInfo.InvariantCulture), 
+                    float.Parse(value.Split('|')[1], CultureInfo.InvariantCulture), 
+                    float.Parse(value.Split('|')[2], CultureInfo.InvariantCulture));
             }
         }
 
@@ -587,9 +604,9 @@ namespace PlayablesPlugins
             {
                 var shape = _particleSystem.shape;
                 shape.scale = new Vector3(
-                    float.Parse(value.Split('|')[0]), 
-                    float.Parse(value.Split('|')[1]), 
-                    float.Parse(value.Split('|')[2]));
+                    float.Parse(value.Split('|')[0], CultureInfo.InvariantCulture), 
+                    float.Parse(value.Split('|')[1], CultureInfo.InvariantCulture), 
+                    float.Parse(value.Split('|')[2], CultureInfo.InvariantCulture));
             }
         }
 
@@ -739,6 +756,42 @@ namespace PlayablesPlugins
         
         #endregion
 
+        #region Texture Sheet Animation
+
+        public bool TextureSheetAnimation
+        {
+            get => _particleSystem.textureSheetAnimation.enabled;
+            set
+            {
+                var textureSheetAnimation = _particleSystem.textureSheetAnimation;
+                textureSheetAnimation.enabled = value;
+            }
+        }
+        
+        public string StartFrame
+        {
+            get => GetterForPropertyRandomBetweenTwoConstants(_particleSystem.textureSheetAnimation.startFrame);
+            set => SetterForPropertyRandomBetweenTwoConstants(
+                value,
+                x =>
+                {
+                    var textureSheetAnimation = _particleSystem.textureSheetAnimation;
+                    textureSheetAnimation.startFrame = x;
+                });
+        }
+        
+        public int TextureSheetAnimationCycles
+        {
+            get => _particleSystem.textureSheetAnimation.cycleCount;
+            set
+            {
+                var textureSheetAnimation = _particleSystem.textureSheetAnimation;
+                textureSheetAnimation.cycleCount = value;
+            }
+        }
+
+        #endregion
+        
         #region Renderer
         
         public bool Renderer
@@ -751,6 +804,75 @@ namespace PlayablesPlugins
             }
         }
 
+        public string RenderModeParticles
+        {
+            get
+            {
+                string answer = "";
+                switch (_particleSystem.GetComponent<ParticleSystemRenderer>().renderMode)
+                {
+                    case ParticleSystemRenderMode.Billboard:
+                        answer = "billboard";
+                        break;
+                    case ParticleSystemRenderMode.Stretch:
+                        answer = "stretched_billboard";
+                        break;
+                    case ParticleSystemRenderMode.HorizontalBillboard:
+                        answer = "horizontal_billboard";
+                        break;
+                    case ParticleSystemRenderMode.VerticalBillboard:
+                        answer = "vertical_billboard";
+                        break;
+                    case ParticleSystemRenderMode.Mesh:
+                        answer = "mesh";
+                        break;
+                    default:
+                        answer = "none";
+                        break;
+                }
+                
+                return answer + "|billboard,stretched_billboard,horizontal_billboard,vertical_billboard,mesh,none";
+            }
+            set
+            {
+                var renderer = _particleSystem.GetComponent<ParticleSystemRenderer>();
+                if (string.Equals(value, "billboard", StringComparison.OrdinalIgnoreCase))
+                {
+                    renderer.renderMode = ParticleSystemRenderMode.Billboard;
+                }
+                else if (string.Equals(value, "stretched_billboard", StringComparison.OrdinalIgnoreCase))
+                {
+                    renderer.renderMode = ParticleSystemRenderMode.Stretch;
+                }
+                else if (string.Equals(value, "horizontal_billboard", StringComparison.OrdinalIgnoreCase))
+                {
+                    renderer.renderMode = ParticleSystemRenderMode.HorizontalBillboard;
+                }
+                else if (string.Equals(value, "vertical_billboard", StringComparison.OrdinalIgnoreCase))
+                {
+                    renderer.renderMode = ParticleSystemRenderMode.VerticalBillboard;
+                }
+                else if (string.Equals(value, "mesh", StringComparison.OrdinalIgnoreCase))
+                {
+                    renderer.renderMode = ParticleSystemRenderMode.Mesh;
+                }
+                else if (string.Equals(value, "none", StringComparison.OrdinalIgnoreCase))
+                {
+                    renderer.renderMode = ParticleSystemRenderMode.None;
+                }
+            }
+        }
+        
+        public float CameraScale
+        {
+            get => _particleSystem.GetComponent<ParticleSystemRenderer>().cameraVelocityScale;
+            set
+            {
+                var renderer = _particleSystem.GetComponent<ParticleSystemRenderer>();
+                renderer.cameraVelocityScale = value;
+            }
+        }
+
         public float NormalDirection
         {
             get => _particleSystem.GetComponent<ParticleSystemRenderer>().normalDirection;
@@ -758,6 +880,106 @@ namespace PlayablesPlugins
             {
                 var renderer = _particleSystem.GetComponent<ParticleSystemRenderer>();
                 renderer.normalDirection = value;
+            }
+        }
+
+        public float SortingFudge
+        {
+            get => _particleSystem.GetComponent<ParticleSystemRenderer>().sortingFudge;
+            set
+            {
+                var renderer = _particleSystem.GetComponent<ParticleSystemRenderer>();
+                renderer.sortingFudge = value;
+            }
+        }
+        
+        public float MinParticleSize
+        {
+            get => _particleSystem.GetComponent<ParticleSystemRenderer>().minParticleSize;
+            set
+            {
+                var renderer = _particleSystem.GetComponent<ParticleSystemRenderer>();
+                renderer.minParticleSize = value;
+            }
+        }
+        
+        public float MaxParticleSize
+        {
+            get => _particleSystem.GetComponent<ParticleSystemRenderer>().maxParticleSize;
+            set
+            {
+                var renderer = _particleSystem.GetComponent<ParticleSystemRenderer>();
+                renderer.maxParticleSize = value;
+            }
+        }
+        
+        public string RenderAlignment
+        {
+            get
+            {
+                string answer = "";
+                switch (_particleSystem.GetComponent<ParticleSystemRenderer>().alignment)
+                {
+                    case ParticleSystemRenderSpace.View:
+                        answer = "view";
+                        break;
+                    case ParticleSystemRenderSpace.World:
+                        answer = "world";
+                        break;
+                    case ParticleSystemRenderSpace.Local:
+                        answer = "local";
+                        break;
+                    case ParticleSystemRenderSpace.Facing:
+                        answer = "facing";
+                        break;
+                    case ParticleSystemRenderSpace.Velocity:
+                        answer = "velocity";
+                        break;
+                    default:
+                        answer = "view";
+                        break;
+                }
+                
+                return answer + "|view,world,local,facing,velocity";
+            }
+            set
+            {
+                var renderer = _particleSystem.GetComponent<ParticleSystemRenderer>();
+                if (string.Equals(value, "view", StringComparison.OrdinalIgnoreCase))
+                {
+                    renderer.alignment = ParticleSystemRenderSpace.View;
+                }
+                else if (string.Equals(value, "world", StringComparison.OrdinalIgnoreCase))
+                {
+                    renderer.alignment = ParticleSystemRenderSpace.World;
+                }
+                else if (string.Equals(value, "local", StringComparison.OrdinalIgnoreCase))
+                {
+                    renderer.alignment = ParticleSystemRenderSpace.Local;
+                }
+                else if (string.Equals(value, "facing", StringComparison.OrdinalIgnoreCase))
+                {
+                    renderer.alignment = ParticleSystemRenderSpace.Facing;
+                }
+                else if (string.Equals(value, "velocity", StringComparison.OrdinalIgnoreCase))
+                {
+                    renderer.alignment = ParticleSystemRenderSpace.Velocity;
+                }
+            }
+        }
+        
+        public string Pivot
+        {
+            get => _particleSystem.GetComponent<ParticleSystemRenderer>().pivot.x
+                   + "|" + _particleSystem.GetComponent<ParticleSystemRenderer>().pivot.y
+                   + "|" + _particleSystem.GetComponent<ParticleSystemRenderer>().pivot.z;
+            set
+            {
+                var renderer = _particleSystem.GetComponent<ParticleSystemRenderer>();
+                renderer.pivot = new Vector3(
+                    float.Parse(value.Split('|')[0], CultureInfo.InvariantCulture), 
+                    float.Parse(value.Split('|')[1], CultureInfo.InvariantCulture), 
+                    float.Parse(value.Split('|')[2], CultureInfo.InvariantCulture));
             }
         }
 
@@ -819,42 +1041,6 @@ namespace PlayablesPlugins
         
         #endregion
 
-        #region Start Frame
-
-        public bool TextureSheetAnimation
-        {
-            get => _particleSystem.textureSheetAnimation.enabled;
-            set
-            {
-                var textureSheetAnimation = _particleSystem.textureSheetAnimation;
-                textureSheetAnimation.enabled = value;
-            }
-        }
-        
-        public string StartFrame
-        {
-            get => GetterForPropertyRandomBetweenTwoConstants(_particleSystem.textureSheetAnimation.startFrame);
-            set => SetterForPropertyRandomBetweenTwoConstants(
-                value,
-                x =>
-                {
-                    var textureSheetAnimation = _particleSystem.textureSheetAnimation;
-                    textureSheetAnimation.startFrame = x;
-                });
-        }
-        
-        public int TextureSheetAnimationCycles
-        {
-            get => _particleSystem.textureSheetAnimation.cycleCount;
-            set
-            {
-                var textureSheetAnimation = _particleSystem.textureSheetAnimation;
-                textureSheetAnimation.cycleCount = value;
-            }
-        }
-
-        #endregion
-        
         public string GetData()
         {
             if (_particleSystem == null)
