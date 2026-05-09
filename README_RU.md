@@ -25,7 +25,7 @@
 
 <img width="502" height="393" alt="09 05 2026 - 12ч03м27с" src="https://github.com/user-attachments/assets/dc1bd0f9-f974-401e-a4cb-f44616148718" />
 
-2) Соберите Develop версию проекта через Tools - Unity Playworks Plugin - собрать Develop.
+2) Соберите Develop версию билда через Tools - Unity Playworks Plugin - собрать Develop.
 
 3) После успешной сборки билда откройте его в браузере. Когда билд загрузиться, внизу страницы появиться кнопка открытия настроек систем партиклей. При ее нажатии открывается боковое меню.
 
