@@ -4,5 +4,5 @@
 Plugin for quickly editing Particle System settings in a build for Luna Playworks
 
 # Установка
-Download the latest version of the plugin from [releases page]([https://example.com](https://github.com/diemonic1/LunaParticleSystem/releases/latest))
+Download the latest version of the plugin from [releases page](https://github.com/diemonic1/LunaParticleSystem/releases/latest)
 
