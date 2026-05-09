@@ -16,7 +16,7 @@
 
 3) - Пакет `LunaParticleSystem.unitypackage` необходимо добавить в ваш проект.
    - Откройте в Unity папку Assets в разделе Project, нажмите правую клавишу мыши и выберите Import Package - Custom Package, а затем выберите `LunaParticleSystem.unitypackage`
-   - импортируйте ассеты плагины в проект.
+   - импортируйте ассеты плагина в проект.
 
 # Использование
 1) После установки пакета в Unity и расширения в браузере выберите любую Particle System на сцене и добавьте к ней компонент `LunaParticleSystem`.
