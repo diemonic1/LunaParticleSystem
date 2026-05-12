@@ -29,6 +29,9 @@ You can add as many particle systems as you like to further customize them.
 
 2) Build the Develop Version via Tools - Unity Playworks Plugin - build Develop.
 
+> [!CAUTION]
+> The particle system will only appear in the settings after the GameObject it is on is enabled. If it is enabled on the stage initially, the setting will appear immediately. To be able to set up the particle system in advance, leave the GameObject enabled, and manually play the particles using _particleSystem.Play();
+
 3) After successfully building the build, open it in your browser. When the build loads, a button for opening particle system settings will appear at the bottom of the page. When you click it, a side menu opens.
 
 4) From the side menu you can:
