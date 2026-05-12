@@ -18,7 +18,7 @@ public class LunaParticleSystemBridge : MonoBehaviour
     private string code_RegistrateFunction = "window.windowLPSsendToPage = function(data) {" +
                                              "window.parent.postMessage({type:'LPS_DATA_StartSetup',payload:data}, '*');};";
 
-    public bool EnableLos { get; private set; }
+    public bool EnableLogs { get; private set; }
     
     public Action<string, bool> OnDataUpdated;
 
@@ -51,7 +51,7 @@ public class LunaParticleSystemBridge : MonoBehaviour
     {
         if (LPSJSWindow.windowLPSData != null)
         {
-            OnDataUpdated?.Invoke(LPSJSWindow.windowLPSData, EnableLos);
+            OnDataUpdated?.Invoke(LPSJSWindow.windowLPSData, EnableLogs);
             LPSJSWindow.windowLPSData = null;
         }
 
@@ -67,9 +67,9 @@ public class LunaParticleSystemBridge : MonoBehaviour
             var str = LPSJSWindow.windowLPSDataEnableLogs.Trim('"');
 
             if (str == "true")
-                EnableLos = true;
+                EnableLogs = true;
             else 
-                EnableLos = false;
+                EnableLogs = false;
 
             LPSJSWindow.windowLPSDataEnableLogs = null;
         }
