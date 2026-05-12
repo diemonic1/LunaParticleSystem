@@ -22,7 +22,7 @@ The release includes a zip archive `LunaParticleSystemExtension.zip` with an ext
 
 # Usage
 1) After installing the package in Unity and the extension in the browser, select any Particle System in the scene and add the `LunaParticleSystem` component to it.
-Once added, ensure that the Partile System field refers to the particle system on this object.
+Once added, ensure that the Particle System field refers to the particle system on this object.
 You can add as many particle systems as you like to further customize them.
 
 <img width="502" height="393" alt="09 05 2026 - 12ч03м27с" src="https://github.com/user-attachments/assets/dc1bd0f9-f974-401e-a4cb-f44616148718" />
