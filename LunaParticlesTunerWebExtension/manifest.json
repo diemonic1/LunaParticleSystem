@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Luna Particles System",
-  "version": "1.0.3",
-  "description": "Luna Particles System",
+  "name": "Luna Particles Tuner",
+  "version": "1.0.5",
+  "description": "Extension for tuning particles systems in Unity's Luna playworks",
   "minimum_chrome_version": "108",
   "icons": {
     "16": "icon.png",

@@ -1061,7 +1061,7 @@ namespace PlayablesPlugins
                 }
 
                 var rawValue = property.GetValue(this, null);
-                if (!DataParsing.TrySerializeValueByDeclaredType(pair.Key, rawValue, out var serializedValue))
+                if (!LunaParticlesTunerDataParsing.TrySerializeValueByDeclaredType(pair.Key, rawValue, out var serializedValue))
                 {
                     continue;
                 }
@@ -1104,13 +1104,13 @@ namespace PlayablesPlugins
             const bool ignoreId = false;
 #endif
 
-            var settingsJson = DataParsing.ExtractSettingsJson(data, id, ignoreId);
+            var settingsJson = LunaParticlesTunerDataParsing.ExtractSettingsJson(data, id, ignoreId);
             if (string.IsNullOrEmpty(settingsJson))
             {
                 return;
             }
 
-            var values = DataParsing.ParseFlatObject(settingsJson);
+            var values = LunaParticlesTunerDataParsing.ParseFlatObject(settingsJson);
             if (values.Count == 0)
             {
                 Debug.LogWarning($"[LPSData Unity] Settings payload for id '{id}' is empty.");
@@ -1119,7 +1119,7 @@ namespace PlayablesPlugins
 
             foreach (var pair in values)
             {
-                if (!DataParsing.TryGetProperty(_allProperties, pair.Key, out var property, out var resolvedKey) || property == null)
+                if (!LunaParticlesTunerDataParsing.TryGetProperty(_allProperties, pair.Key, out var property, out var resolvedKey) || property == null)
                 {
                     Debug.LogWarning($"[LPSData Unity] Unknown field '{pair.Key}' - skipped.");
                     continue;
@@ -1131,9 +1131,9 @@ namespace PlayablesPlugins
                     continue;
                 }
 
-                if (!DataParsing.TryConvertByDeclaredType(resolvedKey, pair.Value, out var convertedValue))
+                if (!LunaParticlesTunerDataParsing.TryConvertByDeclaredType(resolvedKey, pair.Value, out var convertedValue))
                 {
-                    Debug.LogError($"[LPSData Unity] Cannot convert '{pair.Key}' value '{pair.Value}' for declared type '{DataParsing.GetSettingType(resolvedKey)}'.");
+                    Debug.LogError($"[LPSData Unity] Cannot convert '{pair.Key}' value '{pair.Value}' for declared type '{LunaParticlesTunerDataParsing.GetSettingType(resolvedKey)}'.");
                     continue;
                 }
 

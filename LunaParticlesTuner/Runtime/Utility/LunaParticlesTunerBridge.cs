@@ -4,9 +4,9 @@ using PlayablesPlugins;
 using UnityEngine;
 using Object = System.Object;
 
-public class LunaParticleSystemBridge : MonoBehaviour
+public class LunaParticlesTunerBridge : MonoBehaviour
 {
-    private const string Version = "1.0.3";
+    private const string Version = "1.0.5";
     
     // DO NOT MAKE IT A CONSTANT!!!!
     private string code_SubscribeOnUIUpdate = "window.addEventListener('message', (e) => " +
@@ -25,17 +25,17 @@ public class LunaParticleSystemBridge : MonoBehaviour
     private int _currentId = 0;
 
 #if UNITY_LUNA
-    public int RegisterParticleSystem(LunaParticleSystem lunaParticleSystem)
+    public int RegisterParticleSystem(LunaParticlesTuner lunaParticlesTuner)
     {
         _currentId++;
-        LPSJSWindow.windowLPSsendToPage($"{{\"name\": \"{lunaParticleSystem.gameObject.name}\", \"id\": {_currentId}, \"settings\": {lunaParticleSystem.GetData()}}}");
+        LPSJSWindow.windowLPSsendToPage($"{{\"name\": \"{lunaParticlesTuner.gameObject.name}\", \"id\": {_currentId}, \"settings\": {lunaParticlesTuner.GetData()}}}");
         return _currentId;
     }
     
     // necessarily Awake, because Bridge must have time to register the transmitter function in js
     private void Awake()
     {
-        Debug.Log($"[LunaParticleSystemBridge] Start Working \n Version {Version}");
+        Debug.Log($"[LunaParticlesTunerBridge] Start Working \n Version {Version}");
 
         Bridge.Script.Write( "let fn = Function(this.code_SubscribeOnUIUpdate);" );
         Bridge.Script.Write( "fn();" );

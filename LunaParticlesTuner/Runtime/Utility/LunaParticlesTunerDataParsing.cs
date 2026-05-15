@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace PlayablesPlugins
 {
-    public static class DataParsing
+    public static class LunaParticlesTunerDataParsing
     {
         public static bool TryGetProperty(Dictionary<string, PropertyInfo> allProperties, string key, out PropertyInfo property, out string resolvedKey)
         {

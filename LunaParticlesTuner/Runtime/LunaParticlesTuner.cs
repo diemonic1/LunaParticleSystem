@@ -4,7 +4,7 @@ using UnityEngine;
 namespace PlayablesPlugins
 {
     [RequireComponent(typeof(ParticleSystem))]
-    public class LunaParticleSystem : MonoBehaviour
+    public class LunaParticlesTuner : MonoBehaviour
     {
         [Space(20)]
         [Header("Link on ParticleSystem")]
@@ -17,9 +17,7 @@ namespace PlayablesPlugins
         public string Json;
 #endif
 
-        private static bool _lunaParticleSystemBridgeWasSpawned = false;
-        
-        private LunaParticleSystemBridge _lunaParticleSystemBridge;
+        private LunaParticlesTunerBridge _lunaParticlesTunerBridge;
 
         private LPSData _lpsData;
 
@@ -30,21 +28,16 @@ namespace PlayablesPlugins
         {
             CheckParticleSystem();
             _lpsData = new LPSData(_particleSystem);
+
+            _lunaParticlesTunerBridge = GameObject.FindObjectOfType<LunaParticlesTunerBridge>();
             
-            if (_lunaParticleSystemBridgeWasSpawned == false)
-            {
-                _lunaParticleSystemBridgeWasSpawned = true;
-                _lunaParticleSystemBridge = new GameObject("LunaParticleSystemBridge").AddComponent<LunaParticleSystemBridge>();
-            }
-            else
-            {
-                _lunaParticleSystemBridge = GameObject.FindObjectOfType<LunaParticleSystemBridge>();
-            }
+            if (_lunaParticlesTunerBridge == null)
+                _lunaParticlesTunerBridge = new GameObject("LunaParticlesTunerBridge").AddComponent<LunaParticlesTunerBridge>();
             
 #if UNITY_LUNA
-            _id = _lunaParticleSystemBridge.RegisterParticleSystem(this);
+            _id = _lunaParticlesTunerBridge.RegisterParticleSystem(this);
 #endif
-            _lunaParticleSystemBridge.OnDataUpdated += SetData;
+            _lunaParticlesTunerBridge.OnDataUpdated += SetData;
         }
 
         public string GetData()
@@ -72,7 +65,7 @@ namespace PlayablesPlugins
         private void CheckParticleSystem()
         {
             if (_particleSystem == null)
-                throw new Exception("[LunaParticleSystem] ParticleSystem reference is missing on " + gameObject.name);
+                throw new Exception("[LunaParticlesTuner] ParticleSystem reference is missing on " + gameObject.name);
         }
         
 #if UNITY_EDITOR

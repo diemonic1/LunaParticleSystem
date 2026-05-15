@@ -1,7 +1,7 @@
 'use strict';
 
 const TARGET_TITLE = 'Dev Environment - Unity Playworks';
-const DOCUMENTATION_URL = 'https://github.com/diemonic1/LunaParticleSystem';
+const DOCUMENTATION_URL = 'https://github.com/diemonic1/Luna-Particles-Tuner';
 const COMPATIBILITY_TABLE_URL = 'https://docs.google.com/spreadsheets/d/1yAGQokKCIa_cuVtBEkPlxS2xls-0DV8M09hwa01aYk0/edit?pli=1&gid=0#gid=0';
 
 const PREVIEW_IFRAME_ID = 'preview-iframe';
@@ -397,7 +397,7 @@ function createInputForSetting(id, rawKey, value) {
         case 'float':
             return createFloatInput(id, descriptor, value);
         default:
-            throw new Error(`[Luna Particles System JS] Unsupported value type: ${descriptor.valueType} for key: ${rawKey}`);
+            throw new Error(`[Luna Particles Tuner JS] Unsupported value type: ${descriptor.valueType} for key: ${rawKey}`);
     }
 }
 
@@ -416,15 +416,15 @@ function sendDataToLuna(payloadObject) {
             payload: payloadObject
         }, '*');
 
-        logInfo('[Luna Particles System JS] Sent data to Unity.', { payloadObject });
+        logInfo('[Luna Particles Tuner JS] Sent data to Unity.', { payloadObject });
     } catch (error) {
-        console.error('[Luna Particles System JS] Failed to send speed to Unity.', { payloadObject, error });
+        console.error('[Luna Particles Tuner JS] Failed to send speed to Unity.', { payloadObject, error });
     }
 }
 
 function sendSingleFieldUpdate(sectionId, propertyKey, value) {
     if (!sectionId || !propertyKey || value === undefined) {
-        logInfo('[Luna Particles System JS] Skip sending: missing id, key or value.', { sectionId, propertyKey, value });
+        logInfo('[Luna Particles Tuner JS] Skip sending: missing id, key or value.', { sectionId, propertyKey, value });
         return;
     }
 
@@ -476,9 +476,9 @@ function copySectionToClipboard(section) {
     try {
         if (navigator.clipboard && navigator.clipboard.writeText) {
             navigator.clipboard.writeText(jsonString).then(() => {
-                logInfo('[Luna Particles System JS] Section settings copied to clipboard.', { sectionId: sectionData.id }, true);
+                logInfo('[Luna Particles Tuner JS] Section settings copied to clipboard.', { sectionId: sectionData.id }, true);
             }).catch((error) => {
-                console.error('[Luna Particles System JS] Failed to copy to clipboard.', { error });
+                console.error('[Luna Particles Tuner JS] Failed to copy to clipboard.', { error });
             });
         } else {
             const textarea = document.createElement('textarea');
@@ -489,10 +489,10 @@ function copySectionToClipboard(section) {
             textarea.select();
             document.execCommand('copy');
             document.body.removeChild(textarea);
-            logInfo('[Luna Particles System JS] Section settings copied to clipboard (fallback).', { sectionId: sectionData.id }, true);
+            logInfo('[Luna Particles Tuner JS] Section settings copied to clipboard (fallback).', { sectionId: sectionData.id }, true);
         }
     } catch (error) {
-        console.error('[Luna Particles System JS] Failed to copy section settings to clipboard.', { error });
+        console.error('[Luna Particles Tuner JS] Failed to copy section settings to clipboard.', { error });
     }
 }
 
@@ -500,7 +500,7 @@ function saveIsLogsEnabledToStorage() {
     try {
         localStorage.setItem(LOGS_ENABLED_STORAGE_KEY, isJsLogsEnabled ? '1' : '0');
     } catch (error) {
-        logInfo('[Luna Particles System JS] Failed to persist logs state.', { error }, true);
+        logInfo('[Luna Particles Tuner JS] Failed to persist logs state.', { error }, true);
     }
 }
 
@@ -513,7 +513,7 @@ function restoreIsLogsEnabledFromStorage() {
 
         isJsLogsEnabled = savedValue === '1' || savedValue === 'true';
     } catch (error) {
-        logInfo('[Luna Particles System JS] Failed to restore logs state.', { error }, true);
+        logInfo('[Luna Particles Tuner JS] Failed to restore logs state.', { error }, true);
     }
 }
 
@@ -529,7 +529,7 @@ function ensureUiRoot() {
     toggleButton = document.createElement('button');
     toggleButton.id = TOGGLE_BUTTON_ID;
     toggleButton.type = 'button';
-    toggleButton.textContent = 'Luna Particles Settings';
+    toggleButton.textContent = 'Luna Particles Tuner';
     toggleButton.addEventListener('click', () => setPanelVisibility(true));
 
     sidePanel = document.createElement('aside');
@@ -539,13 +539,13 @@ function ensureUiRoot() {
     panelHeader.className = 'lps-panel-header';
 
     const panelTitle = document.createElement('div');
-    panelTitle.textContent = 'Luna Particles Settings';
+    panelTitle.textContent = 'Luna Particles Tuner';
 
     const closeButton = document.createElement('button');
     closeButton.type = 'button';
     closeButton.className = 'lps-panel-close';
     closeButton.textContent = '×';
-    closeButton.setAttribute('aria-label', 'Close Luna Particles Settings');
+    closeButton.setAttribute('aria-label', 'Close Luna Particles Tuner');
     closeButton.addEventListener('click', () => setPanelVisibility(false));
 
     sectionsContainer = document.createElement('div');
@@ -593,8 +593,8 @@ function ensureUiRoot() {
 
         logInfo(
             isJsLogsEnabled
-                ? '[Luna Particles System JS] Logs enabled'
-                : '[Luna Particles System JS] Logs disabled',
+                ? '[Luna Particles Tuner JS] Logs enabled'
+                : '[Luna Particles Tuner JS] Logs disabled',
             undefined,
             true
         );
@@ -1055,7 +1055,7 @@ function sendIsLogsEnabledToLuna() {
 function setupUI(rawPayload) {
     const payload = parseIncomingPayload(rawPayload);
 
-    logInfo('[Luna Particles System JS] Payload received.', payload);
+    logInfo('[Luna Particles Tuner JS] Payload received.', payload);
     upsertSection(payload);
 }
 
@@ -1080,7 +1080,7 @@ function setupIframe() {
             sendIsLogsEnabledToLuna();
             setupUI(e.data.payload);
         } catch (error) {
-            console.error('[Luna Particles System JS] Failed to setup UI.', error);
+            console.error('[Luna Particles Tuner JS] Failed to setup UI.', error);
         }
     });
 

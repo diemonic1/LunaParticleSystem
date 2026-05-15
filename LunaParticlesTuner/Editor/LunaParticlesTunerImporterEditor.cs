@@ -4,8 +4,8 @@ using PlayablesPlugins;
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(PlayablesPlugins.LunaParticleSystem))]
-public class LunaParticleImporterEditor : Editor
+[CustomEditor(typeof(PlayablesPlugins.LunaParticlesTuner))]
+public class LunaParticlesTunerImporterEditor : Editor
 {
     public override void OnInspectorGUI()
     {
@@ -16,7 +16,7 @@ public class LunaParticleImporterEditor : Editor
 
         if (GUILayout.Button("Open Documentation"))
         {
-            Application.OpenURL("https://github.com/diemonic1/LunaParticleSystem");
+            Application.OpenURL("https://github.com/diemonic1/Luna-Particles-Tuner");
         }
         
         GUI.backgroundColor = new Color(0.02f, 0.57f, 0.08f);
@@ -31,7 +31,7 @@ public class LunaParticleImporterEditor : Editor
         
         DrawDefaultInspector();
 
-        PlayablesPlugins.LunaParticleSystem importer = (PlayablesPlugins.LunaParticleSystem)target;
+        PlayablesPlugins.LunaParticlesTuner importer = (PlayablesPlugins.LunaParticlesTuner)target;
         
         GUI.backgroundColor = new Color(0.2f, 0.88f, 0.27f);
 
