@@ -8,7 +8,7 @@ Plugin for quickly editing Particle System settings in a build for Luna Playwork
 # Installation
 Download the latest version of the plugin from [releases page](https://github.com/diemonic1/LunaParticleSystem/releases/latest)
 
-The release includes a zip archive `LunaParticlesTunerWebExtension.zip` with an extension for chromium-based browsers and a package `LunaParticlesTuner.unitypackage`
+The release includes a zip archive `LunaParticlesTunerWebExtension.zip` with an extension for chromium-based browsers and a package `LunaParticlesTuner.zip`
 
 2) - The browser extension must be installed in your browser.
    - Unpack the archive to any convenient place. The folder with the extension cannot be deleted - the browser reads the extension directly from it.
@@ -16,9 +16,7 @@ The release includes a zip archive `LunaParticlesTunerWebExtension.zip` with an 
    - In the upper right corner, turn on the Developer Mode toggle switch.
    - Click Load unpacked and select the folder where the archive was unpacked.
 
-3) - The `LunaParticlesTuner.unitypackage` package must be added to your project.
-   - Open the Assets folder in Unity under Project, right-click and select Import Package - Custom Package, and then select `LunaParticlesTuner.unitypackage`
-   - Import assets plugins into the project.
+3) The `LunaParticlesTuner.zip` package must be added to your project - unzip the archive and transfer the files to your project assets.
 
 # Usage
 > [!CAUTION]
