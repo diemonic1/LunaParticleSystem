@@ -6,7 +6,7 @@
 # Установка
 1) Скачайте последнюю версию плагина на [странице релизов](https://github.com/diemonic1/LunaParticleSystem/releases/latest)
 
-В релиз входит zip архив `LunaParticlesTunerWebExtension.zip` с расширением для браузеров на базе chromium и пакет `LunaParticlesTuner.unitypackage`
+В релиз входит zip архив `LunaParticlesTunerWebExtension.zip` с расширением для браузеров на базе chromium и пакет `LunaParticlesTuner.zip`
 
 2) - Браузерное расширение необходимо установить в ваш браузер.
    - Распакуйте архив в любое удобное место. Папку с расширением нельзя удалять — браузер читает расширение прямо из неё.
@@ -14,9 +14,7 @@
    - В правом верхнем углу включите тумблер Developer mode.
    - Нажмите Load unpacked и выберите папку, в которую распаковали архив.
 
-3) - Пакет `LunaParticlesTuner.unitypackage` необходимо добавить в ваш проект.
-   - Откройте в Unity папку Assets в разделе Project, нажмите правую клавишу мыши и выберите Import Package - Custom Package, а затем выберите `LunaParticlesTuner.unitypackage`
-   - импортируйте ассеты плагина в проект.
+3) - Пакет `LunaParticlesTuner.zip` необходимо добавить в ваш проект - распакуйте архив и перенесите файлы в ассеты вашего проекта.
 
 # Использование
 > [!CAUTION]
