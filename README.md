@@ -1,6 +1,6 @@
 [Документация на русском](README_RU.md)
 
-# LunaParticleSystem
+# Luna Particles Tuner
 Plugin for quickly editing Particle System settings in a build for Luna Playworks
 
 <img width="388" height="928" alt="09 05 2026 - 12ч22м00с" src="https://github.com/user-attachments/assets/f67cd090-5a59-4e06-85ca-37698545f1d0" />
