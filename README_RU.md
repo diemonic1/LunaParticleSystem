@@ -1,5 +1,5 @@
 # Luna Particles Tuner
-Плагин для быстрого редактирования настроек Particle System в билде для Luna Playworks
+Плагин для быстрого редактирования настроек Particle System в Luna Playworks без необохдимости пересобирать или перезагружать билд
 
 <img width="388" height="928" src="https://github.com/user-attachments/assets/f67cd090-5a59-4e06-85ca-37698545f1d0" />
 
