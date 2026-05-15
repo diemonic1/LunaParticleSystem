@@ -20,7 +20,7 @@ The release includes a zip archive `LunaParticlesTunerWebExtension.zip` with an 
 
 # Usage
 > [!CAUTION]
-> After setting up your particles, you MUST compress the plugin from the project to prevent its code from getting into the release version of the playable. If this is not done, the plugin can significantly degrade the playable's performance while it is running.
+> After setting up your particles, you MUST delete the plugin from the project to prevent its code from getting into the release version of the playable. If this is not done, the plugin can significantly degrade the playable's performance while it is running.
 
 1) After installing the package in Unity and the extension in the browser, select any Particle System in the scene and add the `LunaParticlesTuner` component to it.
 Once added, ensure that the Particle System field refers to the particle system on this object.
